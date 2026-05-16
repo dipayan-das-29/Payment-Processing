@@ -1,1 +1,41 @@
+# Gradle build output and cache
 .gradle/
+build/
+**/build/
+!**/src/**/build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.example
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.sts4-cache/
+.project
+.classpath
+.factorypath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Java artifacts
+*.class
+*.jar
+*.war
+*.ear
+
+# Test / temporary files
+*.tmp
+*.swp
