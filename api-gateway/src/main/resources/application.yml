@@ -1,0 +1,28 @@
+server:
+  port: ${GATEWAY_SERVER_PORT}
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: api-gateway
+  data:
+    redis:
+      host: ${GATEWAY_REDIS_HOST}
+      port: ${GATEWAY_REDIS_PORT}
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=X-Gateway, payment-platform
+
+security:
+  jwt:
+    secret: ${GATEWAY_JWT_SECRET}
+    expiration-minutes: ${GATEWAY_JWT_EXPIRATION_MINUTES}
+    issuer: ${GATEWAY_JWT_ISSUER}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: ${GATEWAY_MANAGEMENT_ENDPOINTS}

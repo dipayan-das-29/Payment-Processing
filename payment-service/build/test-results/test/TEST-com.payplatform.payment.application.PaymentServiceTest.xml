@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.payplatform.payment.application.PaymentServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-05-16T12:04:32" hostname="DESKTOP-E5KLR92" time="0.165">
+  <properties/>
+  <testcase name="shouldReturnPaymentsByUserId()" classname="com.payplatform.payment.application.PaymentServiceTest" time="0.049"/>
+  <testcase name="shouldSetStatusToFailedWhenBankRejects()" classname="com.payplatform.payment.application.PaymentServiceTest" time="0.043"/>
+  <testcase name="shouldCompletePaymentWhenBankApproves()" classname="com.payplatform.payment.application.PaymentServiceTest" time="0.025"/>
+  <testcase name="shouldThrowWhenPaymentNotFound()" classname="com.payplatform.payment.application.PaymentServiceTest" time="0.026"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

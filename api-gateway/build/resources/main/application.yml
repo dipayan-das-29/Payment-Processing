@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: api-gateway
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  cloud:
+    gateway:
+      default-filters:
+        - AddResponseHeader=X-Gateway, payment-platform
+
+security:
+  jwt:
+    secret: cGF5cGxhdGZvcm1wYXltZW50c2VjcmV0a2V5MTIzNDU2Nzg5MA==
+    expiration-minutes: 60
+    issuer: payplatform
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

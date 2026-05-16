@@ -1,0 +1,18 @@
+server:
+  port: 8085
+
+spring:
+  application:
+    name: auth-service
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+security:
+  jwt:
+    secret: cGF5cGxhdGZvcm1wYXltZW50c2VjcmV0a2V5MTIzNDU2Nzg5MA==
+    expiration-minutes: 60
+    issuer: payplatform
