@@ -236,6 +236,84 @@ For a fresh setup demonstration on a new system, use this order:
 6. Fetch payments for the user to verify persistence and routing. [file:673]
 7. Optionally inspect Redis to observe the idempotency marker. [web:1132]
 
+## Local Configuration
+
+This project uses environment-variable based configuration for all services.
+
+Create a root `.env` file in the project root and keep it out of Git. Commit only `.env.example`.
+
+Example:
+
+```env
+GATEWAY_SERVER_PORT=8080
+AUTH_SERVER_PORT=8085
+PAYMENT_SERVER_PORT=8081
+LEDGER_SERVER_PORT=8082
+FRAUD_SERVER_PORT=8083
+NOTIFICATION_SERVER_PORT=8084
+```
+
+## Running on Windows without Docker
+
+A `.env` file is not executed directly by Windows or Spring Boot by default. The easiest local approach is to use a `.bat` launcher that reads `.env`, sets the variables for the current process, and starts the target service. [cite:1621][cite:1627]
+
+Example `run-payment-service.bat`:
+
+```bat
+@echo off
+setlocal
+
+for /f "usebackq tokens=1,* delims==" %%A in (".env") do (
+    if not "%%A"=="" (
+        if not "%%A:~0,1%"=="#" (
+            set "%%A=%%B"
+        )
+    )
+)
+
+call gradlew.bat :payment-service:bootRun
+
+endlocal
+```
+
+Run it with:
+
+```bat
+run-payment-service.bat
+```
+
+You can create similar launchers for the other services:
+
+```bat
+run-api-gateway.bat
+run-auth-service.bat
+run-ledger-service.bat
+run-fraud-detection-service.bat
+run-notification-service.bat
+```
+
+## Alternative: import `.env` directly in Spring Boot
+
+If preferred, Spring Boot can import a root `.env` file using:
+
+```properties
+spring.config.import=optional:file:.env[.properties]
+```
+
+In that case, the `.env` file must be compatible with Spring property loading. [cite:1568][cite:1626]
+
+## Running with Gradle Wrapper
+
+Use the Gradle wrapper on Windows:
+
+```bat
+gradlew.bat :payment-service:bootRun
+gradlew.bat :api-gateway:bootRun
+gradlew.bat :auth-service:bootRun
+```
+
+The Gradle wrapper is the recommended way to run the project because it avoids requiring a separate local Gradle installation. [cite:1627]
+
 ## Notes For Improvement
 
 The current implementation is functional for a local portfolio demo, but it is not yet a fully polished production-grade payment flow. A stronger next iteration would:
